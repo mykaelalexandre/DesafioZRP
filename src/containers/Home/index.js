@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { searchPokemon, getPokemonData, getPokemons } from "../../services/api";
 import { FavoriteProvider } from "../../contexts/favoriteContext";
@@ -7,9 +8,11 @@ import Pokedex from "../../components/Pokedex";
 import Searchbar from "../../components/Input";
 import Navbar from "../../components/Navbar";
 
+
 const favoritesKey = "f";
 
 function Home() {
+
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -17,7 +20,9 @@ function Home() {
   const [pokemons, setPokemons] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
+
   const itensPerPage = 10;
+
 
   const fetchPokemons = async () => {
     try {
@@ -45,12 +50,14 @@ function Home() {
   };
 
   useEffect(() => {
+
     loadFavoritePokemons();
   }, []);
 
   useEffect(() => {
     fetchPokemons();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [page]);
 
   const updateFavoritePokemons = (name) => {
@@ -66,8 +73,10 @@ function Home() {
     setFavorites(updatedFavorites);
   };
 
+
+
   const onSearchHandler = async (pokemon) => {
-    console.log(pokemon);
+
     if (!pokemon) {
       return fetchPokemons();
     }
@@ -84,10 +93,12 @@ function Home() {
       setTotalPages(1);
     }
     setLoading(false);
+
   };
 
   return (
     <FavoriteProvider
+
       value={{
         favoritePokemons: favorites,
         updateFavoritePokemons: updateFavoritePokemons,
@@ -111,6 +122,7 @@ function Home() {
           )}
         </Container>
       </div>
+
     </FavoriteProvider>
   );
 }
