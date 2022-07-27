@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { searchPokemon, getPokemonData, getPokemons, apiPokeapi} from '../../services/api'
+
+import React, { useEffect, useState } from "react";
+import { searchPokemon, getPokemonData, getPokemons } from "../../services/api";
 import { FavoriteProvider } from "../../contexts/favoriteContext";
-import { Container } from './styles'
-import Header from '../../components/Header'
-import Pokedex from '../../components/Pokedex';
+import { Container } from "./styles";
+import Header from "../../components/Header";
+import Pokedex from "../../components/Pokedex";
 import Searchbar from "../../components/Input";
-import Navbar from '../../components/Navbar'
+import Navbar from "../../components/Navbar";
 
 
 const favoritesKey = "f";
@@ -18,11 +19,9 @@ function Home() {
   const [notFound, setNotFound] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [favorites, setFavorites] = useState([]);
- 
- 
+
+
   const itensPerPage = 10;
-
-
 
 
   const fetchPokemons = async () => {
@@ -51,12 +50,14 @@ function Home() {
   };
 
   useEffect(() => {
-    loadFavoritePokemons()
+
+    loadFavoritePokemons();
   }, []);
 
   useEffect(() => {
-    fetchPokemons()
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchPokemons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [page]);
 
   const updateFavoritePokemons = (name) => {
@@ -73,7 +74,9 @@ function Home() {
   };
 
 
+
   const onSearchHandler = async (pokemon) => {
+
     if (!pokemon) {
       return fetchPokemons();
     }
@@ -82,40 +85,44 @@ function Home() {
 
     const result = await searchPokemon(pokemon);
     if (!result) {
-      setLoading(false)
+      setLoading(false);
       setNotFound(true);
     } else {
-      setPokemons([result])
+      setPokemons([result]);
       setPage(0);
-      setTotalPages(1)
+      setTotalPages(1);
     }
-    setLoading(false)
+    setLoading(false);
+
   };
 
   return (
     <FavoriteProvider
-    value={{
-      favoritePokemons: favorites,
-      updateFavoritePokemons: updateFavoritePokemons,
-    }}
-  >
-    <div>
-      <Container>
-        <Header></Header>
-        <Navbar />
-        <Searchbar onSearch={onSearchHandler} />
-        {notFound ? (
-          <h1>Não achamos esse Pokemon :\</h1>
-        ) : (
-            <Pokedex 
-            pokemons={pokemons}
-            loading={loading}
-            page={page}
-            setPage={setPage}
-            totalPages={totalPages}></Pokedex>
-        )}
-      </Container>
-    </div>
+
+      value={{
+        favoritePokemons: favorites,
+        updateFavoritePokemons: updateFavoritePokemons,
+      }}
+    >
+      <div>
+        <Container>
+          <Header></Header>
+          <Navbar />
+          <Searchbar onSearch={onSearchHandler} />
+          {notFound ? (
+            <h1>Não achamos esse Pokemon :\</h1>
+          ) : (
+            <Pokedex
+              pokemons={pokemons}
+              loading={loading}
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+            ></Pokedex>
+          )}
+        </Container>
+      </div>
+
     </FavoriteProvider>
   );
 }
