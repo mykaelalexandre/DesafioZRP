@@ -16,12 +16,6 @@ Siga o passo a passo abaixo para instalação do backend e front end.
 
 ## Instalação do Backend :card_index_dividers:
 
-Acesse o arquivo BackendAPi.zip que está na pasta raiz junto com os arquivos
-ex.:package.json.
-
-Desconpactue e Extraia em pasta proxima a pasta raiz do frotend. Para facilitar
-o acesso após.
-
 Inicie o projeto em uma bash(powershell) secundaria a parte frontend, ou em
 alguma Plataforma a parte.(Ex:Vs CODE)
 
